@@ -2,6 +2,7 @@ import {HttpException, Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {TodoInterface} from "./model/todo.interface";
 import {Model} from "mongoose";
+import {TodoDto} from "./model/todo.dto";
 
 @Injectable()
 export class TodoService {
@@ -17,7 +18,7 @@ export class TodoService {
     }
   }
 
-  async create(todo: TodoInterface): Promise<TodoInterface> {
+  async create(todo: TodoDto): Promise<TodoInterface> {
     try {
       todo.created_at = Date().toString();
       todo.created_by = 'shay zalman';

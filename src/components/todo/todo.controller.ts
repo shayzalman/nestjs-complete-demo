@@ -1,7 +1,9 @@
 import {Body, Controller, Delete, Get, Param, Patch, Post} from "@nestjs/common";
 import {TodoService} from "./todo.service";
 import {TodoInterface} from "./model/todo.interface";
-import {HttpHelper, ResponseObj} from "../../shared/httpHelper";
+import {HttpHelper} from "../../shared/httpHelper";
+import {TodoDto} from "./model/todo.dto";
+import {ResponseDto} from "../../shared/response.dto";
 
 @Controller("todo")
 export class TodoController {
@@ -11,13 +13,13 @@ export class TodoController {
       ) {}
 
   @Get()
-  async getAll(): Promise<ResponseObj> {
+  async getAll(): Promise<ResponseDto> {
     const ret = await this.todoService.getAll();
     return this.http.handleResponse(!!ret, ret);
   }
 
   @Post()
-  async create(@Body() todo: TodoInterface) {
+  async create(@Body() todo: TodoDto) {
     const ret = await this.todoService.create(todo);
     return this.http.handleResponse(!!ret, ret);
   }

@@ -1,14 +1,9 @@
 import {Injectable} from "@nestjs/common";
-
-export class ResponseObj {
-    success: boolean;
-    data: any;
-    error: String;
-}
+import {ResponseDto} from "./response.dto";
 
 @Injectable()
 export class HttpHelper {
-    handleResponse(status: boolean, data?: any): ResponseObj{
+    handleResponse(status: boolean, data?: any): ResponseDto{
         return {
             success: status,
             data: data,

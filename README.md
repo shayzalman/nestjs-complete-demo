@@ -1,4 +1,4 @@
-<p align="center">
+<p>
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
@@ -42,10 +42,11 @@ $ npm run test:cov
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
+## credit
 
 - Author - [Shay Zalman](https://github.com/shayzalman)
+- Auth & user by [Pejman Hadavi](https://github.com/pejmanhadavi/real-world-example-nestjs-mongoose-jwt-auth)
 
 ## License
 
-  Nest is [MIT licensed](LICENSE).
+  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).

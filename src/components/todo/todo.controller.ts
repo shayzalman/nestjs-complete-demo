@@ -1,9 +1,10 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, Patch, Post, UsePipes} from "@nestjs/common";
 import {TodoService} from "./todo.service";
 import {TodoInterface} from "./model/todo.interface";
 import {HttpHelper} from "../../shared/httpHelper";
 import {TodoDto} from "./model/todo.dto";
 import {ResponseDto} from "../../shared/response.dto";
+import {ValidateIdPipe} from "../../shared/validate-id.pipe";
 
 @Controller("todo")
 export class TodoController {
@@ -24,6 +25,7 @@ export class TodoController {
     return this.http.handleResponse(!!ret, ret);
   }
 
+  @UsePipes(ValidateIdPipe)
   @Delete(':id')
   async remove(@Param('id') id: String) {
     const ret = await this.todoService.delete(id);

@@ -1,10 +1,10 @@
 import {ArgumentMetadata, BadRequestException, Injectable, PipeTransform} from '@nestjs/common';
-import * as mongoose from 'mongoose';
+import {Types} from 'mongoose';
 
 @Injectable()
 export class ValidateIdPipe implements PipeTransform<string> {
     async transform(value: string, metadata: ArgumentMetadata) {
-        const isValid = mongoose.Types.ObjectId.isValid(value);
+        const isValid = Types.ObjectId.isValid(value);
         if (!isValid) {
             throw new BadRequestException('Invalid ID!');
         }

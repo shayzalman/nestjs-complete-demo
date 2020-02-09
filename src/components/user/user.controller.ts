@@ -8,6 +8,7 @@ import {CreateUserDto} from './dto/create-user.dto';
 import {VerifyUuidDto} from './dto/verify-uuid.dto';
 import {UserService} from './user.service';
 import {AuthGuard} from '@nestjs/passport';
+import {RolesGuard} from '../auth/guards/roles.guard';
 import {RefreshAccessTokenDto} from './dto/refresh-access-token.dto';
 import {
     ApiBadRequestResponse,
@@ -18,7 +19,6 @@ import {
     ApiOkResponse,
     ApiUnauthorizedResponse
 } from '@nestjs/swagger';
-import {RolesGuard} from '../auth/guards/roles.guard';
 
 @Controller('user')
 @UseGuards(RolesGuard)

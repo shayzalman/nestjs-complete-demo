@@ -11,6 +11,11 @@ import {AuthModule} from "./components/auth/auth.module";
       conf.db.uri,
       { useNewUrlParser: true, useUnifiedTopology: true }
     ),
+    // GraphQLModule.forRoot({
+    //   playground: true,
+    //   debug: true,
+    //   autoSchemaFile: 'schema.gql'
+    // }),
     TodoModule,
     UserModule,
     AuthModule

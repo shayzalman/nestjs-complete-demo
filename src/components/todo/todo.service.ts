@@ -3,6 +3,7 @@ import {InjectModel} from "@nestjs/mongoose";
 import {TodoInterface} from "./model/todo.interface";
 import {Model} from "mongoose";
 import {TodoDto} from "./model/todo.dto";
+import {TodoInput} from "./model/todo.gql.args";
 
 @Injectable()
 export class TodoService {
@@ -18,7 +19,7 @@ export class TodoService {
     }
   }
 
-  async create(todo: TodoDto): Promise<TodoInterface> {
+  async create(todo: TodoDto|TodoInput): Promise<TodoInterface> {
     try {
       todo.created_at = Date().toString();
       todo.created_by = 'shay zalman';
@@ -37,12 +38,20 @@ export class TodoService {
       throw new HttpException('Unable to delete item.\nAdditional error info: ' + e.message, 500);
     }
   }
+
+  async getOne(id: String): Promise<TodoInterface> {
+    try {
+      return await this.todoModel.findById({_id: id}).exec();
+    } catch (e) {
+      throw new HttpException('Unable to find item.\nAdditional error info: ' + e.message, 500);
+    }
+  }
   
-  async update(todo: TodoInterface): Promise<TodoInterface> {
+  async update(todo: TodoInterface|TodoInput): Promise<TodoInterface> {
     try{
       todo.created_at = Date().toString();
       todo.created_by = 'shay zalman';
-      return await this.todoModel.update({_id: todo.id}, todo);
+      return await this.todoModel.update({_id: todo._id}, todo);
     } catch (e) {
       throw new HttpException('Unable to update the item.\nAdditional error info: ' + e.message, 500);
     }

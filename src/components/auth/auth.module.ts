@@ -7,6 +7,7 @@ import {MongooseModule} from '@nestjs/mongoose';
 import {UserSchema} from '../user/schemas/user.schema';
 import {RefreshTokenSchema} from './schemas/refresh-token.schema';
 import {conf} from "../../conf/config";
+import {GqlGuard} from "./guards/gql.guard";
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import {conf} from "../../conf/config";
       signOptions: { expiresIn: conf.auth.jwt_exp },
     }),
   ],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, GqlGuard],
   exports: [AuthService],
 })
 export class AuthModule {}

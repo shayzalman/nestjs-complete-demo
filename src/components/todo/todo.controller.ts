@@ -11,9 +11,9 @@ import {Roles} from "../auth/decorators/roles.decorator";
 @Controller("todo")
 export class TodoController {
   constructor(
-      private readonly todoService: TodoService,
-      private readonly http: HttpHelper
-      ) {}
+    private readonly todoService: TodoService,
+    private readonly http: HttpHelper
+  ) {}
 
   @Get()
   async getAll(): Promise<ResponseDto> {
@@ -22,24 +22,24 @@ export class TodoController {
   }
 
   @Post()
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   async create(@Body() todo: TodoDto) {
     const ret = await this.todoService.create(todo);
     return this.http.handleResponse(!!ret, ret);
   }
 
-  @Delete(':id')
+  @Delete(":id")
   @UsePipes(ValidateIdPipe)
-  @Roles('admin')
-  @UseGuards(AuthGuard('jwt'))
-  async remove(@Param('id') id: String) {
+  @Roles("admin")
+  @UseGuards(AuthGuard("jwt"))
+  async remove(@Param("id") id: String) {
     const ret = await this.todoService.delete(id);
     return this.http.handleResponse(!!ret, ret);
   }
 
   @Patch()
-  @UseGuards(AuthGuard('jwt'))
-  async update(@Body() todo: TodoInterface){
+  @UseGuards(AuthGuard("jwt"))
+  async update(@Body() todo: TodoInterface) {
     const ret = await this.todoService.update(todo);
     return this.http.handleResponse(!!ret, ret);
   }

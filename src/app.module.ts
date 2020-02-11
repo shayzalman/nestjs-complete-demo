@@ -2,24 +2,24 @@ import {Module} from "@nestjs/common";
 import {TodoModule} from "./components/todo/todo.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import {conf} from "./conf/config";
-import {UserModule} from './components/user/user.module';
+import {UserModule} from "./components/user/user.module";
 import {AuthModule} from "./components/auth/auth.module";
 import {GraphQLModule} from "@nestjs/graphql";
-import {PubSub} from 'graphql-subscriptions';
+import {PubSub} from "graphql-subscriptions";
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      conf.db.uri,
-      { useNewUrlParser: true, useUnifiedTopology: true }
-    ),
+    MongooseModule.forRoot(conf.db.uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }),
     GraphQLModule.forRoot({
-      playground: process.env.NODE_ENV === 'DEV',
-      debug: process.env.NODE_ENV === 'DEV',
-      autoSchemaFile: 'schema.gql',
+      playground: process.env.NODE_ENV === "dev",
+      debug: process.env.NODE_ENV === "dev",
+      autoSchemaFile: "schema.gql",
       installSubscriptionHandlers: true,
       context: ({ req, res }) => ({ req, res }),
-      path: '/api/gql' //custom end-point
+      path: "/api/gql" //custom end-point
     }),
     TodoModule,
     UserModule,
@@ -28,8 +28,8 @@ import {PubSub} from 'graphql-subscriptions';
   controllers: [],
   providers: [
     {
-      provide: 'PUB_SUB',
-      useValue: new PubSub(),
+      provide: "PUB_SUB",
+      useValue: new PubSub()
     }
   ]
 })

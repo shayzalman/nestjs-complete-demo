@@ -17,8 +17,9 @@ import {PubSub} from "graphql-subscriptions";
     ResponseDto,
     TodoResolver,
     {
-      provide: 'PUB_SUB',
+      provide: "PUB_SUB",
       useValue: new PubSub()
-    }]
+    }
+  ]
 })
 export class TodoModule {}

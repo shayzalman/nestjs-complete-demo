@@ -6,6 +6,7 @@ import {TodoDto} from "./model/todo.dto";
 import {ResponseDto} from "../../shared/response.dto";
 import {ValidateIdPipe} from "../../shared/validate-id.pipe";
 import {AuthGuard} from "@nestjs/passport";
+import {Roles} from "../auth/decorators/roles.decorator";
 
 @Controller("todo")
 export class TodoController {
@@ -27,8 +28,9 @@ export class TodoController {
     return this.http.handleResponse(!!ret, ret);
   }
 
-  @UsePipes(ValidateIdPipe)
   @Delete(':id')
+  @UsePipes(ValidateIdPipe)
+  @Roles('admin')
   @UseGuards(AuthGuard('jwt'))
   async remove(@Param('id') id: String) {
     const ret = await this.todoService.delete(id);

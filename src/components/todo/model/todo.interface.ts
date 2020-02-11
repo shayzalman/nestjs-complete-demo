@@ -1,8 +1,8 @@
 import {Document} from "mongoose";
 
 export interface TodoInterface extends Document {
-  readonly status: Number;
-  readonly title: String;
-  created_at?: String;
-  created_by?: String;
+  readonly status: number;
+  readonly title: string;
+  created_at?: string;
+  created_by?: string;
 }

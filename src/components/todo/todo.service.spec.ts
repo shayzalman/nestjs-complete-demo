@@ -13,7 +13,7 @@ async function getMongo() {
 const todoData = {
   id: "asddasd",
   title: "Jane Doe",
-  status: 1,
+  status: true,
   created_at: "Wed Jan 29 2020 10:23:57 GMT+0200 (Israel Standard Time)",
   created_by: "shay zalman"
 };
@@ -52,12 +52,12 @@ describe("Todo Model Test", () => {
   it("insert item successfully, but with a foreign and invalid field", async () => {
     const todoWithInvalidField = new todoModel({
       title: "testing",
-      status: 1,
+      status: true,
       date: Date().toString()
     });
     const savedItemWithInvalidField = await todoWithInvalidField.save();
     expect(savedItemWithInvalidField._id).toBeDefined();
-    expect(typeof savedItemWithInvalidField.status).toBe("number");
+    expect(typeof savedItemWithInvalidField.status).toBe("boolean");
     expect(savedItemWithInvalidField.date).toBeUndefined();
   });
 

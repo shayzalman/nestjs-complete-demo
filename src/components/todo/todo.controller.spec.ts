@@ -9,7 +9,7 @@ class TodoServiceMock {
   private item: TodoInterface = {
     id: "asddasd",
     title: "Jane Doe",
-    status: 1,
+    status: true,
     created_at: "Wed Jan 29 2020 10:23:57 GMT+0200 (Israel Standard Time)",
     created_by: "shay zalman"
   };

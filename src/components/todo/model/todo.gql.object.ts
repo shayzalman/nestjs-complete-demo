@@ -1,12 +1,12 @@
-import {Field, Int, ObjectType} from "type-graphql";
+import {Field, ObjectType} from "type-graphql";
 
 @ObjectType()
 export class TodoGqlObject {
   @Field(type => String)
   _id: string;
 
-  @Field(type => Int)
-  status: number;
+  @Field(type => Boolean)
+  status: boolean;
 
   @Field({ nullable: false, description: "this is the title field" })
   title: string;

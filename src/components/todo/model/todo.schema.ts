@@ -2,7 +2,7 @@ import * as mongoose from "mongoose";
 
 export const TodoSchema = new mongoose.Schema({
   status: {
-    type: Number,
+    type: Boolean,
     required: true
   },
   title: {

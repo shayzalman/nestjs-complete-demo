@@ -59,11 +59,11 @@ export class TodoService {
     }
   }
 
-  async update(todo: TodoInterface | TodoInput): Promise<TodoInterface> {
+  async update(todo: TodoInterface | TodoInput): Promise<any> {
     try {
       todo.created_at = Date().toString();
       todo.created_by = "shay zalman";
-      return await this.todoModel.update({ _id: todo._id }, todo);
+      return await this.todoModel.updateOne({ _id: todo._id }, todo).exec();
     } catch (e) {
       throw new HttpException(
         "Unable to update the item.\nAdditional error info: " + e.message,

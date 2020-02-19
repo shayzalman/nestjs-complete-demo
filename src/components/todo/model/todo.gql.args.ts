@@ -1,5 +1,5 @@
-import {ArgsType, Field, InputType, Int} from "type-graphql";
-import {IsOptional, Length, MaxLength} from "class-validator";
+import {ArgsType, Field, InputType} from "type-graphql";
+import {IsOptional, MaxLength} from "class-validator";
 
 @ArgsType()
 export class TodoArgs {
@@ -13,9 +13,8 @@ export class TodoInput {
   @Field({ nullable: true, description: "this is an optional id field" })
   _id?: string;
 
-  @Field(type => Int)
-  @Length(1, 1)
-  status: number;
+  @Field(type => Boolean)
+  status: boolean;
 
   @MaxLength(128)
   @Field({ nullable: false, description: "this is the title field" })

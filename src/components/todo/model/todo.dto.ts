@@ -4,7 +4,7 @@ export class TodoDto {
   @ApiProperty({
     description: "Define the status of the item"
   })
-  readonly status: Number;
+  readonly status: Boolean;
 
   @ApiProperty({
     description: "Define the title of the item",

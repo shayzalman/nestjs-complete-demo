@@ -1,0 +1,49 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type TodoGqlObject {
+  _id: String!
+  status: Boolean!
+
+  """this is the title field"""
+  title: String!
+
+  """this is the created time field"""
+  created_at: String
+
+  """this is the created by field"""
+  created_by: String
+}
+
+type Query {
+  todos: [TodoGqlObject!]
+  todo(id: String!): TodoGqlObject!
+}
+
+type Mutation {
+  create(newTodoData: TodoInput!): TodoGqlObject!
+  update(newTodoData: TodoInput!): Boolean!
+  delete(id: String!): Boolean!
+}
+
+input TodoInput {
+  """this is an optional id field"""
+  _id: String
+  status: Boolean!
+
+  """this is the title field"""
+  title: String!
+
+  """this is the created time field"""
+  created_at: String
+
+  """this is the created by field"""
+  created_by: String
+}
+
+type Subscription {
+  todoAdded: TodoGqlObject!
+  todoUpdated: TodoGqlObject!
+  todoRemoved: TodoGqlObject!
+}

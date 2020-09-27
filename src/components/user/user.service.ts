@@ -28,14 +28,6 @@ export class UserService {
     private readonly authService: AuthService
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
-    const user = new this.userModel(createUserDto);
-    await this.isEmailUnique(user.email);
-    this.setRegistrationInfo(user);
-    await user.save();
-    return UserService.buildRegistrationInfo(user);
-  }
-
   async verifyEmail(req: Request, verifyUuidDto: VerifyUuidDto) {
     const user = await this.findByVerification(verifyUuidDto.verification);
     await UserService.setUserAsVerified(user);
@@ -45,6 +37,14 @@ export class UserService {
       accessToken: await this.authService.createAccessToken(user._id),
       refreshToken: await this.authService.createRefreshToken(req, user._id)
     };
+  }
+
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const user = new this.userModel(createUserDto);
+    await this.isEmailUnique(user.email);
+    this.setRegistrationInfo(user);
+    await user.save();
+    return UserService.buildRegistrationInfo(user);
   }
 
   async login(req: Request, loginUserDto: LoginUserDto) {
@@ -207,7 +207,16 @@ export class UserService {
       expires: addHours(new Date(), this.HOURS_TO_VERIFY),
       ip: this.authService.getIp(req),
       browser: this.authService.getBrowserInfo(req),
-      country: this.authService.getCountry(req)
+      country: this.authService.getCountry(req),
+
+      firstUsed: true,
+      finalUsed: true,
+      ipRequest: '',
+      browserRequest: '',
+      countryRequest: '',
+      ipChanged: '',
+      browserChanged: '',
+      countryChanged: ''
     });
     await forgotPassword.save();
   }

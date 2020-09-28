@@ -11,13 +11,13 @@ import {AuthGuard} from "@nestjs/passport";
 import {RolesGuard} from "../auth/guards/roles.guard";
 import {RefreshAccessTokenDto} from "./dto/refresh-access-token.dto";
 import {
-    ApiBadRequestResponse,
-    ApiConflictResponse,
-    ApiCreatedResponse,
-    ApiForbiddenResponse,
-    ApiNotFoundResponse,
-    ApiOkResponse,
-    ApiUnauthorizedResponse
+  ApiBadRequestResponse,
+  ApiConflictResponse,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiUnauthorizedResponse
 } from "@nestjs/swagger";
 
 @Controller("user")
@@ -25,7 +25,11 @@ import {
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  /**
+   *
+   * @param createUserDto
+   */
+  @Post('register')
   @HttpCode(HttpStatus.CREATED)
   @ApiCreatedResponse({
     description: "The record has been successfully created."
@@ -38,6 +42,11 @@ export class UserController {
     return await this.userService.create(createUserDto);
   }
 
+  /**
+   *
+   * @param req
+   * @param verifyUuidDto
+   */
   @Post("verify-email")
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({ description: "User has been successfully verified." })
@@ -48,6 +57,11 @@ export class UserController {
     return await this.userService.verifyEmail(req, verifyUuidDto);
   }
 
+  /**
+   *
+   * @param req
+   * @param loginUserDto
+   */
   @Post("login")
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({
@@ -64,6 +78,10 @@ export class UserController {
     return await this.userService.login(req, loginUserDto);
   }
 
+  /**
+   *
+   * @param refreshAccessTokenDto
+   */
   @Post("refresh-access-token")
   @HttpCode(HttpStatus.CREATED)
   @ApiCreatedResponse({
@@ -79,6 +97,11 @@ export class UserController {
     return await this.userService.refreshAccessToken(refreshAccessTokenDto);
   }
 
+  /**
+   *
+   * @param req
+   * @param createForgotPasswordDto
+   */
   @Post("forgot-password")
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({ description: "Verification has been sent." })
@@ -93,6 +116,11 @@ export class UserController {
     return await this.userService.forgotPassword(req, createForgotPasswordDto);
   }
 
+  /**
+   *
+   * @param req
+   * @param verifyUuidDto
+   */
   @Post("forgot-password-verify")
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({ description: "Now user can reset his/her password." })
@@ -106,6 +134,10 @@ export class UserController {
     return await this.userService.forgotPasswordVerify(req, verifyUuidDto);
   }
 
+  /**
+   *
+   * @param resetPasswordDto
+   */
   @Post("reset-password")
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({ description: "Password has been successfully changed." })
@@ -116,6 +148,9 @@ export class UserController {
     return await this.userService.resetPassword(resetPasswordDto);
   }
 
+  /**
+   * find all
+   */
   @Get("data")
   @UseGuards(AuthGuard("jwt"))
   @Roles("admin")

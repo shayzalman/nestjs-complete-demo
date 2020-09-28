@@ -18,7 +18,7 @@ export class CreateUserDto {
 
   // Email
   @ApiProperty({
-    example: "pejman@gmail.com",
+    example: "xxx@ccc.com",
     description: "The email of the User",
     format: "email",
     uniqueItems: true,
